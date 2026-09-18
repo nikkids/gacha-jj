@@ -1,0 +1,6 @@
+import { Aura, Rarity } from "../models";
+const color: Record<Rarity, string> = { Common: "37", Uncommon: "32", Rare: "34", Epic: "35", Legendary: "33", Mythic: "36", Secret: "31" };
+export const paint = (text: string, code = "36") => `\x1b[${code}m${text}\x1b[0m`;
+export const rarity = (value: Rarity) => paint(value.toUpperCase(), `1;${color[value]}`);
+export function box(title: string, lines: string[]): string { const width = 58; const row = (value = "") => `║ ${value.slice(0, width - 4).padEnd(width - 4)} ║`; return ["╔" + "═".repeat(width - 2) + "╗", row(title.padStart(Math.floor((width - 4 + title.length) / 2))), "╠" + "═".repeat(width - 2) + "╣", ...lines.map(row), "╚" + "═".repeat(width - 2) + "╝"].join("\n"); }
+export const auraReveal = (aura: Aura, fresh: boolean, gold: number, hasAudio: boolean) => box("♫ TRACK DISCOVERED ♫", ["", `                 ${aura.visualSymbol}  ${aura.name.toUpperCase()}`, "", `                   ${rarity(aura.rarity)}`, `                   1 / ${aura.baseChance.toLocaleString()}`, "", hasAudio ? "          🔊 Memutar MP3 lokal..." : `     MP3 tidak ditemukan: ${aura.audioFile}`, "", fresh ? "              ✨ NEW DISCOVERY!" : `              DUPLICATE  +${gold} Gold`, "", "             ↵ Press Enter to continue"]);
