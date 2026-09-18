@@ -1,6 +1,6 @@
 {
   "name": "gacha-jj",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gacha JJ — a terminal music-track collection game.",
   "license": "MIT",
   "type": "commonjs",
